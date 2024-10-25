@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import axios from "axios";
 import { ref } from 'vue'
 
 defineProps<{ msg: string }>()
+
+const response = ref(null);
+
+const getValue = async () => {
+  try {
+    response.value = await axios({ url: '/api/test', baseURL: 'http://127.0.0.1:8000/' });
+  } catch (error) {
+    // Do something with the error
+    console.log(error);
+  }
+};
 
 const count = ref(0)
 </script>
@@ -10,7 +22,7 @@ const count = ref(0)
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="getValue">count is {{ count }}</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
