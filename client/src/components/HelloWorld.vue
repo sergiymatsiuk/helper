@@ -1,53 +1,37 @@
 <script setup lang="ts">
-import axios from "axios";
-import { ref } from 'vue'
+import { useGlobalStore } from "../stores/global.ts";
+import ConfigProvider from "../components/providers/ConfigProvider.vue";
+import AdminLayout from "./layouts/admin/AdminLayout.vue";
 
-defineProps<{ msg: string }>()
 
-const response = ref(null);
+const { message, modal, notification } = useGlobalStore();
 
-const getValue = async () => {
-  try {
-    response.value = await axios({ url: '/api/test', baseURL: 'http://127.0.0.1:8000/' });
-  } catch (error) {
-    // Do something with the error
-    console.log(error);
-  }
+console.log(message, modal, notification);
+
+const showMessage = () => {
+  message.success('Success!');
 };
 
-const count = ref(0)
+const showModal = () => {
+  modal.warning({
+    title: 'This is a warning message',
+    content: 'some messages...some messages...',
+  });
+};
+
+const showNotification = () => {
+  notification.info({
+    message: `Notification topLeft`,
+    description: 'Hello, Ant Design Vue!!',
+    placement: 'topLeft',
+  });
+};
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="getValue">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a
-      href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support"
-      target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <a-space>
+    <a-button type="primary" @click="showMessage">Open message</a-button>
+    <a-button type="primary" @click="showModal">Open modal</a-button>
+    <a-button type="primary" @click="showNotification">Open notification</a-button>
+  </a-space>
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>
