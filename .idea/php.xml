@@ -120,6 +120,9 @@
       <path value="$PROJECT_DIR$/server/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/server/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/server/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/server/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/server/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/server/vendor/league/uri-interfaces" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
